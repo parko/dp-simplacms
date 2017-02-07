@@ -1,11 +1,13 @@
 <?php
 /*
  */
- 
+
+
 // Работаем в корневой директории
 chdir ('../../');
 require_once('api/Simpla.php');
 $simpla = new Simpla();
+
 
 
 if($_POST['delta_send']){
@@ -17,6 +19,7 @@ return;
 		$postData = file_get_contents('php://input');
 		$data = json_decode($postData, true);
 	}
+
 
 ////////////////////////////////////////////////
 // Проверка статуса
@@ -52,6 +55,7 @@ if($order->paid)
 
 
 $amount = round($simpla->money->convert($order->total_price, $method->currency_id, false), 2)*100;
+
 
 if($data['transaction']['amount'] != $amount || $amount<=0)
 	err("incorrect price");
